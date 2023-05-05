@@ -31,35 +31,35 @@ public class HotelManagementService {
     }
 
     public String getHotelWithMostFacilities() {
-//        return hmr.getHotelWithMostFacilites();
-        List<Hotel> hotels = hmr.getAllHotels();
-        if (hotels.isEmpty()) {
-            return "";
-        }
-        Map<String, Integer> facilitiesCount = new HashMap<>();
-        for (Hotel hotel : hotels) {
-            for (Facility facility : hotel.getFacilities()) {
-                facilitiesCount.put(String.valueOf(facility), facilitiesCount.getOrDefault(facility, 0) + 1);
-            }
-        }
-        if (facilitiesCount.isEmpty()) {
-            return "";
-        }
-        String hotelWithMostFacilities = "";
-        int maxFacilities = 0;
-        for (Hotel hotel : hotels) {
-            int numFacilities = 0;
-            for (Facility facility : hotel.getFacilities()) {
-                numFacilities += facilitiesCount.getOrDefault(facility, 0);
-            }
-            if (numFacilities > maxFacilities) {
-                maxFacilities = numFacilities;
-                hotelWithMostFacilities = hotel.getHotelName();
-            } else if (numFacilities == maxFacilities) {
-                hotelWithMostFacilities = hotel.getHotelName().compareTo(hotelWithMostFacilities) < 0 ? hotel.getHotelName() : hotelWithMostFacilities;
-            }
-        }
-        return hotelWithMostFacilities;
+        return hmr.getHotelWithMostFacilites();
+//        List<Hotel> hotels = hmr.getAllHotels();
+//        if (hotels.isEmpty()) {
+//            return "";
+//        }
+//        Map<String, Integer> facilitiesCount = new HashMap<>();
+//        for (Hotel hotel : hotels) {
+//            for (Facility facility : hotel.getFacilities()) {
+//                facilitiesCount.put(String.valueOf(facility), facilitiesCount.getOrDefault(facility, 0) + 1);
+//            }
+//        }
+//        if (facilitiesCount.isEmpty()) {
+//            return "";
+//        }
+//        String hotelWithMostFacilities = "";
+//        int maxFacilities = 0;
+//        for (Hotel hotel : hotels) {
+//            int numFacilities = 0;
+//            for (Facility facility : hotel.getFacilities()) {
+//                numFacilities += facilitiesCount.getOrDefault(facility, 0);
+//            }
+//            if (numFacilities > maxFacilities) {
+//                maxFacilities = numFacilities;
+//                hotelWithMostFacilities = hotel.getHotelName();
+//            } else if (numFacilities == maxFacilities) {
+//                hotelWithMostFacilities = hotel.getHotelName().compareTo(hotelWithMostFacilities) < 0 ? hotel.getHotelName() : hotelWithMostFacilities;
+//            }
+//        }
+//        return hotelWithMostFacilities;
 
 
     }

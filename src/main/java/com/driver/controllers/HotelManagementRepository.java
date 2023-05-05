@@ -17,6 +17,8 @@ public class HotelManagementRepository {
     Map<String, Integer> facilitiesCount = new HashMap<>();
 
     Map<String, Booking> bookings = new HashMap<>();
+
+
     public String addHotel(Hotel hotel) {
         if(hotels.containsKey(hotel.getHotelName())){
             return "FAILURE";
@@ -107,5 +109,44 @@ public class HotelManagementRepository {
             // If it doesn't, add the hotel object to the map
             hotels.put(hotel.getHotelName(), hotel);
         }
+    }
+
+    public String getHotelWithMostFacilites() {
+        List<Hotel> hotels = getAllHotels();
+        if (hotels.isEmpty()) {
+            return "";
+        }
+
+        String hotelWithMostFacilities = "";
+        int maxFacilities = 0;
+
+        for (Hotel hotel : hotels) {
+
+            int numFacilities = 0;
+            for (Facility facility : hotel.getFacilities()) {
+                String facilityName = String.valueOf(facility);
+                facilitiesCount.put(facilityName, facilitiesCount.getOrDefault(facilityName, 0) + 1);
+                numFacilities++;
+            }
+
+            if (numFacilities > maxFacilities) {
+                maxFacilities = numFacilities;
+                hotelWithMostFacilities = hotel.getHotelName();
+            } else if (numFacilities == maxFacilities) {
+                int numFacilitiesForCurrentHotel = 0;
+                int numFacilitiesForMaxHotel = 0;
+                for (Integer count : facilitiesCount.values()) {
+                    numFacilitiesForCurrentHotel += count;
+                    numFacilitiesForMaxHotel +=getHotelByName(hotelWithMostFacilities).getFacilities().stream()
+                            .filter(f -> String.valueOf(f).equals(facilitiesCount.keySet())).count();
+                }
+
+                if (numFacilitiesForCurrentHotel > numFacilitiesForMaxHotel) {
+                    hotelWithMostFacilities = hotel.getHotelName();
+                }
+            }
+        }
+
+        return hotelWithMostFacilities;
     }
 }
