@@ -49,4 +49,6 @@ public class Hotel {
     public void setPricePerNight(int pricePerNight) {
         this.pricePerNight = pricePerNight;
     }
+
+
 }
